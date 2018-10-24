@@ -27,15 +27,25 @@ image_word = []
 
 # Save images
 image_set = []
+
+# Loop over all images
 for img in images:
+    # Original image
     image = cv2.imread(img)
-    image_set.append(image)
+
+    # Resize images with INTER_CUBIC interpolation
+    res = cv2.resize(image, dsize=(64, 64), interpolation=cv2.INTER_CUBIC)
+
+    # Append RESIZED image
+    image_set.append(res)
+
+    # Get the name of the class
     corresponding_link = os.path.basename(img)
     corresponding_link = corresponding_link.split('_')[0]
     image_word.append(identificadores[corresponding_link])
 
 # Image to visualize
-n = 100
+n = 25788
 
 # Visualize an image
 imagen =image_set[n]
