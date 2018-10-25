@@ -1,16 +1,17 @@
 # Proyecto EL-4106
 
 <pre>
-load_images.py              -- Loads images
+load_images.py              --  Loads images
 
-load_images_PIL.py          -- Loads images in PIL format
+load_images_PIL.py          --  Loads images in PIL format
 
-visualize_image.py          -- Visualize a single image (resized) and its tag 
+visualize_image.py          --  Visualize a single image (resized) and its tag 
                                 (doesn't load all images)
 
-single_image.py             -- To return a single resized image and its tag
+single_image.py             --  To return a single resized image and its tag
 
-preimplemented_models.py    -- TODO: Use existing model weights
+preimplemented_models.py    --  TODO: Use existing model weights
+                                Note: Does nothing yet
 </pre>
 
 <b>Notes:</b> If you use another computer you have to change <i>tags</i>
