@@ -14,9 +14,17 @@ images = glob.glob('/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/
                    recursive = True)
 
 
-# Function that visualizes a single image
-def single_img(n):
+# Function that visualizes a single image and its tag
+def single_img(n, height, width):
+    '''
+    Gets a single image and its tag.
 
+    :param      n       : Number of the image to visualize
+                height  :size to rescale the height of the image
+                width   : size to rescale the width of the image
+
+    :return:    A tuple with the images scaled to size, and its tag
+    '''
     # Read lines from the text file with the tags
     with open(tags) as tag:
         content = tag.readlines()
@@ -39,7 +47,7 @@ def single_img(n):
     image = cv2.imread(img)
 
     # Resize images with INTER_CUBIC interpolation
-    res = cv2.resize(image, dsize=(64, 64), interpolation=cv2.INTER_CUBIC)
+    res = cv2.resize(image, dsize=(height, width), interpolation=cv2.INTER_CUBIC)
 
 
     # Get the name of the class

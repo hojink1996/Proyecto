@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 n = 35788
 
 # Visualize an image
-imagen, image_word = single_img(n)
+imagen, image_word = single_img(n, 64, 64)
 imgplot = plt.imshow(imagen)
 plt.show()
 
