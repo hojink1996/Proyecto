@@ -1,3 +1,10 @@
+'''
+Script that loads all images of tiny imagenet and its respective tags.
+Also visualizes one of the images with its tag to make sure it works.
+
+Authors: Hojin Kang and Tomas Nunez
+'''
+
 import glob
 import cv2
 import matplotlib.pyplot as plt
