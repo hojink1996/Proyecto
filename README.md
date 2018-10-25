@@ -5,10 +5,10 @@ load_images.py              -- Loads images
 
 load_images_PIL.py          -- Loads images in PIL format
 
-visualize_image.py          -- Visualize a single image and its tag 
+visualize_image.py          -- Visualize a single image (resized) and its tag 
                                 (doesn't load all images)
 
-single_image.py             -- To return a single image and its tag
+single_image.py             -- To return a single resized image and its tag
 
 preimplemented_models.py    -- TODO: Use existing model weights
 </pre>
