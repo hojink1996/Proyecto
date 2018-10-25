@@ -12,7 +12,8 @@ n = 35788
 
 # Visualize an image
 imagen, image_word = single_img(n)
-
 imgplot = plt.imshow(imagen)
 plt.show()
+
+# Show the tag
 print(image_word)
