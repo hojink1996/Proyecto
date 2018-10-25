@@ -1,5 +1,5 @@
 '''
-Script that loads all images of tiny imagenet in PIL format and its respective tags.
+Script that loads ALL IMAGES of tiny imagenet in PIL format and its respective tags.
 Also visualizes one of the images with its tag to make sure it works.
 
 Authors: Hojin Kang and Tomas Nunez
