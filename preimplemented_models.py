@@ -14,7 +14,7 @@ from keras.applications import inception_v3
 import matplotlib.pyplot as plt
 import ssl
 
-# Fix SSL Error
+# Arreglar error de ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
@@ -23,10 +23,8 @@ resnet_model = resnet50.ResNet50(weights='imagenet')
 inception_model = inception_v3.InceptionV3(weights='imagenet')
 images = glob.glob('/home/tomas/Documents/Inteligencia Computacional/tiny-imagenet-200/train/**/*.JPEG',
                    recursive = True)
-
 labelpath = '/home/tomas/Documents/Inteligencia Computacional/tiny-imagenet-200/words.txt'
 n = 5015
-
 with open(labelpath) as tag:
     content = tag.readlines()
 # We make a HashMap (dictionary) with the identifiers
@@ -55,7 +53,6 @@ x = resnet50.preprocess_input(x)
 xInc = image.img_to_array(imgInception)
 xInc = np.expand_dims(xInc, axis=0)
 xInc = inception_v3.preprocess_input(xInc)
-
 #Get predictions from both models
 pred = resnet_model.predict(x)
 predInc = inception_model.predict(xInc)
