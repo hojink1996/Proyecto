@@ -8,7 +8,7 @@ from single_image import single_img
 import matplotlib.pyplot as plt
 
 # Image to visualize
-n = 35788
+n = 101
 
 # Visualize an image
 imagen, image_word = single_img(n, 64, 64)

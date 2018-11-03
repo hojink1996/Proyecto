@@ -12,12 +12,16 @@ from keras.applications import resnet50
 from keras.preprocessing import image
 from keras.applications import inception_v3
 import matplotlib.pyplot as plt
+import ssl
+
+# Arreglar error de ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 resnet_model = resnet50.ResNet50(weights='imagenet')
 inception_model = inception_v3.InceptionV3(weights='imagenet')
-images = glob.glob('/home/tomas/Documents/Inteligencia Computacional/tiny-imagenet-200/train/**/*.JPEG',
+images = glob.glob('/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/train/**/*.JPEG',
                    recursive = True)
-labelpath = '/home/tomas/Documents/Inteligencia Computacional/tiny-imagenet-200/words.txt'
+labelpath = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/words.txt'
 n = 10002
 with open(labelpath) as tag:
     content = tag.readlines()

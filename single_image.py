@@ -8,8 +8,8 @@ import glob
 import cv2
 import os
 
-tags = '/home/tomas/Documents/Inteligencia Computacional/tiny-imagenet-200/words.txt'
-images = glob.glob('/home/tomas/Documents/Inteligencia Computacional/tiny-imagenet-200/train/**/*.JPEG',
+tags = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/words.txt'
+images = glob.glob('/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/train/**/*.JPEG',
                    recursive = True)
 
 
