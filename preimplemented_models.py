@@ -14,7 +14,7 @@ from keras.applications import inception_v3
 import matplotlib.pyplot as plt
 import ssl
 
-# Arreglar error de ssl
+# Fix SSL Error
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
@@ -55,6 +55,7 @@ x = resnet50.preprocess_input(x)
 xInc = image.img_to_array(imgInception)
 xInc = np.expand_dims(xInc, axis=0)
 xInc = inception_v3.preprocess_input(xInc)
+
 #Get predictions from both models
 pred = resnet_model.predict(x)
 predInc = inception_model.predict(xInc)

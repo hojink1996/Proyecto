@@ -8,6 +8,7 @@ import glob
 from PIL import Image
 import urllib.request
 
+# Tags and images
 tags = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/words.txt'
 images ='/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/fall11_urls.txt'
 

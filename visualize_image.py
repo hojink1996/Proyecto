@@ -8,7 +8,7 @@ from load_single_imagenet import single_img
 import matplotlib.pyplot as plt
 
 # Image to visualize
-n = 1325021
+n = 132512
 
 # Visualize an image
 imagen, image_word = single_img(n, 224, 224)
