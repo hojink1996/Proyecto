@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 import os
 
 # Location of file with tags and images
-tags = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/words.txt'
-images = glob.glob('/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/train/**/*.JPEG',
+tags = '/home/tomas/Documents/Inteligencia Computacional/tiny-imagenet-200/words.txt'
+images = glob.glob('/home/tomas/Documents/Inteligencia Computacional/tiny-imagenet-200/train/**/*.JPEG',
                    recursive = True)
 
 # Read lines from the text file with the tags
