@@ -22,7 +22,7 @@ inception_model = inception_v3.InceptionV3(weights='imagenet')
 images = glob.glob('/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/train/**/*.JPEG',
                    recursive = True)
 labelpath = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/words.txt'
-n = 10002
+n = 1000
 with open(labelpath) as tag:
     content = tag.readlines()
 # We make a HashMap (dictionary) with the identifiers
