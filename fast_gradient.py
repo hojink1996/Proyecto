@@ -1,12 +1,6 @@
-import numpy as np
-import glob
-import os
+
 import tensorflow as tf
 from keras.applications import resnet50
-from keras.preprocessing import image
-from keras.applications import inception_v3
-import matplotlib.pyplot as plt
-import ssl
 
 resnet_model = resnet50.ResNet50(weights='imagenet')
 resnet_model.compile(loss='mean_squared_error', optimizer='sgd')
