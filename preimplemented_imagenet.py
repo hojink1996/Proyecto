@@ -7,16 +7,20 @@ and the adversarial example itself.
 Authors: Hojin Kang and Tomas Nunez
 '''
 
-import numpy as np
+# Model import
 from keras.applications import resnet50
 from keras.preprocessing import image
 from keras.applications import inception_v3
 
-from load_single_imagenet import single_img
+# Extra library imports
 import matplotlib.pyplot as plt
 import ssl
+import numpy as np
 
+# Personal library import
 from adv_example_generation import fast_gradient, arraytoimage
+from load_single_imagenet import single_img
+
 
 # Fix SSL Error
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -25,7 +29,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 # 2 Models used: ResNet and Inception V3
 resnet_model = resnet50.ResNet50(weights='imagenet')
 inception_model = inception_v3.InceptionV3(weights='imagenet')
-n = 124619
+n = 790245
 
 # Input size for ResNet = 224*224
 img, tag, identifier = single_img(n, 224, 224)

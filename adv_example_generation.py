@@ -1,5 +1,5 @@
 '''
-Script that generates adversarial examples
+Script that generates adversarial examples and also does the reverse procedure of the preprocessing.
 
 Authors: Hojin Kang and Tomas Nunez
 '''
@@ -59,7 +59,7 @@ def arraytoimage(xarr, dim):
     x_out[..., 1] += 116.779
     x_out[..., 2] += 123.68
 
-    # Convert from BGR to RGB
+    # Convert from BGR to RGB (revert preprocessing)
     x_out = x_out[..., ::-1]
 
     # Convert array to image

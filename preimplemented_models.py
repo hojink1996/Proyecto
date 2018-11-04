@@ -1,6 +1,5 @@
 '''
-Note: Does nothing at the moment.
-TODO: Run a pretrained model.
+Predicts using a preimplemented model using the tiny imagenet dataset
 
 Authors: Hojin Kang and Tomas Nunez
 '''

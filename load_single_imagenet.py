@@ -1,5 +1,5 @@
 '''
-Script that implemeted to generate a single image and its tag.
+Script implemented to get a single image from the imagenet dataset, its tag and its idetifier (code)
 
 Authors: Hojin Kang and Tomas Nunez
 '''
@@ -25,7 +25,7 @@ def single_img(n, height, width):
                 height  :size to rescale the height of the image
                 width   : size to rescale the width of the image
 
-    :return:    A tuple with the images scaled to size, and its tag
+    :return:    A tuple with the images scaled to size, its tag and the identifier
     '''
     # Read lines from the text file with the tags
     with open(tags) as tag:
@@ -52,12 +52,15 @@ def single_img(n, height, width):
             elif i > n:
                 break
 
+    # Set the user agent
     user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
-
     headers = {'User-Agent': user_agent, }
+
+    # Make the request to the page
     request = urllib.request.Request(link, None, headers)
     response = urllib.request.urlopen(request)
 
+    # Get the image from the page and save it
     img = Image.open(response)
     img.save("temp.jpg", "JPEG")
 
