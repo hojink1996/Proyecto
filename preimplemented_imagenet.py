@@ -25,7 +25,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 # 2 Models used: ResNet and Inception V3
 resnet_model = resnet50.ResNet50(weights='imagenet')
 inception_model = inception_v3.InceptionV3(weights='imagenet')
-n = 450353
+n = 124619
 
 # Input size for ResNet = 224*224
 img, tag, identifier = single_img(n, 224, 224)
@@ -48,19 +48,20 @@ clase = tag
 print('Predicted ResNet:', resnet50.decode_predictions(pred, top=5)[0])
 print('Predicted InceptionV3: ', inception_v3.decode_predictions(predInc, top=5)[0])
 print('Real: ', clase, ' ', identifier)
-print('===== Adversarial Examples ======')
 
 # Show original imageimg = Image.fromarray(data, 'RGB')
 implot = plt.imshow(img)
 plt.show()
 
+# Adversarial examples
+print('===== Adversarial Examples ======')
+
 # Generate an adversarial example for the resnet model
-xadv, filter = fast_gradient(resnet_model, x, 0.3)
+xadv, filter = fast_gradient(resnet_model, x, 3)
 pred = resnet_model.predict(xadv)
 
 # Show adversarial example filter
-filter_image = arraytoimage(filter, (224, 224, 3))
-filtplot = plt.imshow(filter_image)
+filtplot = plt.imshow(filter[0])
 plt.show()
 
 # Show adversarial example

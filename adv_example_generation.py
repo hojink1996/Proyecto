@@ -18,7 +18,7 @@ def fast_gradient(model, x, eps=0.25):
                 x       : The original image from which to generate the adversarial example
                 eps     : The epsilon parameter that ponderates the gradient sign
 
-    :return:    A tuple containing the adversarial example and the filter used to generate it
+    :return:    A tuple containing the adversarial example and the filter (sign of gradient) used to generate it
     '''
     # Predicted result in normal case
     y = model.predict(x).argmax()
@@ -40,7 +40,7 @@ def fast_gradient(model, x, eps=0.25):
     signo = np.sign(val_gradiente([x])[0])
     xadv = x + eps*signo
 
-    return xadv, eps*signo
+    return xadv, signo
 
 def arraytoimage(xarr, dim):
     '''
@@ -63,7 +63,7 @@ def arraytoimage(xarr, dim):
     x_out = x_out[..., ::-1]
 
     # Convert array to image
-    x_out = x_out.astype(np.uint8, casting='unsafe')
+    x_out = np.clip(x_out, 0., 255.).astype(np.uint8)
     img = Image.fromarray(x_out, 'RGB')
 
     return img
