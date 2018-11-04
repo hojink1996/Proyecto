@@ -4,10 +4,6 @@
 adv_example_generation.py   --  Has all the scripts needed to generate adversarial
                                 examples and visualize them.
                                 
-load_images.py              --  Loads images
-
-load_images_PIL.py          --  Loads images in PIL format
-
 load_single_imagenet.py     --  Loads a single image from the ImageNet library and
                                 gives its tag and identifier. Image is loaded in
                                 PIL format.
