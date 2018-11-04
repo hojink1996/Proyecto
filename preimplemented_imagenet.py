@@ -20,13 +20,13 @@ ssl._create_default_https_context = ssl._create_unverified_context
 # 2 Models used: ResNet and Inception V3
 resnet_model = resnet50.ResNet50(weights='imagenet')
 inception_model = inception_v3.InceptionV3(weights='imagenet')
-n = 1325135
+n = 97123
 
 # Input size for ResNet = 224*224
-img, tag = single_img(n, 224, 224)
+img, tag, identifier = single_img(n, 224, 224)
 
 # Input size for Inception V3 = 299*299
-imgInception, tag = single_img(n, 299, 299)
+imgInception, tag, identifier = single_img(n, 299, 299)
 
 # Preprocessing
 x = image.img_to_array(img)
@@ -42,7 +42,7 @@ predInc = inception_model.predict(xInc)
 clase = tag
 print('Predicted ResNet:', resnet50.decode_predictions(pred, top=5)[0])
 print('Predicted InceptionV3: ', inception_v3.decode_predictions(predInc, top=5)[0])
-print('Real: ', clase)
+print('Real: ', clase, ' ', identifier)
 
 implot = plt.imshow(img)
 plt.show()

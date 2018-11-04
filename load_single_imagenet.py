@@ -5,6 +5,8 @@ Authors: Hojin Kang and Tomas Nunez
 '''
 
 import glob
+import shutil
+from keras.preprocessing import image
 from PIL import Image
 import PIL
 import urllib.request
@@ -40,26 +42,30 @@ def single_img(n, height, width):
         identificadores[codigo] = descriptor
 
     # Get the image link and identifier
-    with open(images) as image:
-        for i, line in enumerate(image):
+    with open(images) as image_opener:
+        for i, line in enumerate(image_opener):
             if i == n:
                 identifier = line.split('_')[0]
                 link = line.split('http')[1]
                 link = 'http' + link
+                print(link)
             elif i > n:
                 break
 
-    # Get image from URL
-    with urllib.request.urlopen(link) as url:
-        with open('temp.jpg', 'wb') as f:
-            f.write(url.read())
-    img = Image.open('temp.jpg')
+    user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
 
-    #Resize image
+    headers = {'User-Agent': user_agent, }
+    request = urllib.request.Request(link, None, headers)
+    response = urllib.request.urlopen(request)
+
+    img = Image.open(response)
+    img.save("temp.jpg", "JPEG")
+
+    # Resize image
     size = (height, width)
-    img = img.resize(size, PIL.Image.LANCZOS)
+    img = image.load_img("temp.jpg", target_size=size)
 
     # Get the name of the class
     clase = identificadores[identifier]
 
-    return img, clase
+    return img, clase, identifier
