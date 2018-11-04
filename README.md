@@ -1,23 +1,26 @@
 # Proyecto EL-4106
 
 <pre>
+adv_example_generation.py   --  Has all the scripts needed to generate adversarial
+                                examples and visualize them.
+                                
 load_images.py              --  Loads images
 
 load_images_PIL.py          --  Loads images in PIL format
 
-visualize_image.py          --  Visualize a single image (resized) and its tag 
-                                (doesn't load all images)
-
+load_single_imagenet.py     --  Loads a single image from the ImageNet library and
+                                gives its tag and identifier. Image is loaded in
+                                PIL format.
+                                
+preimplemented_imagenet.py  --  Sample for generating a single adversarial example.
+                                Gets the original image and its prediction, and
+                                compares it to the filtered image and its predictiong.
+                                
 single_image.py             --  To return a single resized image and its tag
 
-preimplemented_models.py    --  TODO: Use existing model weights
-                                Note: Does nothing yet
+visualize_image.py          --  Visualize a single image (resized) and its tag 
+                                (doesn't load all images)
 </pre>
-
-<b>Notes:</b> If you use another computer you have to change <i>tags</i>
-and <i>images</i> in lines 7 and 8 of <i>load_images.py</i> and
-<i>load_images_PIL.py</i> to the path where you have the .txt file
-with the tags, and the folder with all the images respectively. 
 
 ## Example case for image visualization
 
@@ -25,3 +28,17 @@ with the tags, and the folder with all the images respectively.
 
 ![Example text](Examples/example_text.png)
 
+## Example case for adversarial example
+
+#### Original image and prediction
+![Example image](Examples/original_image.png)
+
+![Example image](Examples/original_pred.png)
+
+#### Filter for Adversarial Example
+![Example image](Examples/filter.png)
+
+#### Adversarial image and prediction
+![Example image](Examples/adversarial_example.png)
+
+![Example image](Examples/adversarial_pred.png)
