@@ -6,6 +6,7 @@ Authors: Hojin Kang and Tomas Nunez
 
 import glob
 from PIL import Image
+import PIL
 import urllib.request
 
 # Tags and images
@@ -55,8 +56,8 @@ def single_img(n, height, width):
     img = Image.open('temp.jpg')
 
     #Resize image
-    size = height, width
-    img.thumbnail(size, Image.ANTIALIAS)
+    size = (height, width)
+    img = img.resize(size, PIL.Image.LANCZOS)
 
     # Get the name of the class
     clase = identificadores[identifier]
