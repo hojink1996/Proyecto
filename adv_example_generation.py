@@ -42,15 +42,49 @@ def fast_gradient(model, x, eps=0.25):
 
     return xadv, signo
 
+def deepfool(x, model, eps=1e-6, max_iter=100, classes=1000):
+    tol = 1e-8
+    xadv = x.copy()
+    # Predicted result in normal case
+    y = model.predict(x)
+    y_var = K.variable(y)
+    y_class = y.argmax()
+    y_class_i = y_class
+
+    costo = metrics.categorical_crossentropy(model.output, esperado)
+    gradiente = K.gradients(costo, model.input)
+    val_gradiente = K.function([model.input], gradiente)
+    grad = val_gradiente([x])[0]
+    nb_iter = 0
+    perturb = xadv
+    while y_class_i == y_class and nb_iter < max_iter:
+        grd_dif = grad - grad[y_class]
+        y_diff = y - y[y_class]
+
+        #Mask the true label (not considered when calculating perturbation norm)
+
+        mask = [0]*classes
+        mask[y_class] = 1
+        norm = np.linalg.norm(grd_dif.reshape(classes,-1), axis=1)
+        diff_normalized = np.ma.array(np.abs(y_diff)/norm, mask=mask)
+
+        #Choose index of smallest difference, fill value corresponding to true class to +inf
+        l = value.argmin(fill_value =np.inf)
+        r = (abs(y_diff[l]) / (pow(np.linalg.norm(y_diff[l]), 2) + tol)) * y_diff[l]
+        perturb = np.clip(perturb + r, 0, 1)
+
+        #Recalculate prediction for potential adversarial example
+
+        y = model.predict(perturb)
 def arraytoimage(xarr, dim):
-    '''
+    """
     Makes a PIL image from an array
 
     :param      xarr    : An array corresponding to the image
                 dim     : The dimensions of the image
 
     :return:    The PIL image that represents the original image
-    '''
+    """
     # Reshape the array to image dimensions
     x_out = np.reshape(xarr, dim)
 
