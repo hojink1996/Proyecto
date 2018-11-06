@@ -12,7 +12,7 @@ from PIL import Image
 
 def fast_gradient(model, x, eps=0.25):
     '''
-    Generates an adversarial example for the model
+    Generates an adversarial example for the model using the fast gradient method
 
     :param      model   : The model from which to generate an adversarial example
                 x       : The original image from which to generate the adversarial example
@@ -97,14 +97,14 @@ def deepfool(x, model, eps=1e-6, max_iter=100, classes=1000):
     return x_adv, y_class, y_adv
 
 def arraytoimage(xarr, dim):
-    """
-    Makes a PIL image from an array
+    '''
+    Makes a PIL image from an array (removing preprocessing for the RESNET network)
 
     :param      xarr    : An array corresponding to the image
                 dim     : The dimensions of the image
 
     :return:    The PIL image that represents the original image
-    """
+    '''
     # Reshape the array to image dimensions
     x_out = np.reshape(xarr, dim)
 

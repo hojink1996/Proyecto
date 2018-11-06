@@ -70,6 +70,7 @@ print('===== Adversarial Examples ======')
 
 xadv, _, pred = deepfool(x, resnet_model)
 
+
 # Show adversarial example filter
 #filtplot = plt.imshow(filter[0])
 #plt.show()
