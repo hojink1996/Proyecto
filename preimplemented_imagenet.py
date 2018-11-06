@@ -63,19 +63,16 @@ print('===== Adversarial Examples ======')
 
 # Generate an adversarial example for the resnet model
 
-#xadv, filter = fast_gradient(resnet_model, x, 3)
-#pred = resnet_model.predict(xadv)
+# xadv, filter = fast_gradient(resnet_model, x, 3)
+# pred = resnet_model.predict(xadv)
 
-#TESTTTT
-
+# Testing
 xadv, _, pred = deepfool(x, resnet_model,classes=31)
 
 
 # Show adversarial example filter
-#filtplot = plt.imshow(filter[0])
-#plt.show()
-
-
+# filtplot = plt.imshow(filter[0])
+# plt.show()
 
 # Show adversarial example
 adversarial_image = arraytoimage(xadv, (224, 224, 3))
@@ -84,7 +81,7 @@ plt.show()
 
 print('Predicted ResNet:', resnet50.decode_predictions(pred, top=5)[0])
 
-#Show perturbation
+# Show perturbation
 perturb = xadv-x
 filtplot = plt.imshow(perturb)
 plt.show()

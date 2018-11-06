@@ -11,7 +11,7 @@ from PIL import Image
 import PIL
 import urllib.request
 
-# Tags and images
+# Path to tags and images
 # tags = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/words.txt'
 # images ='/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/fall11_urls.txt'
 tags = '/home/tomas/Documents/Inteligencia Computacional/tiny-imagenet-200/words.txt'
