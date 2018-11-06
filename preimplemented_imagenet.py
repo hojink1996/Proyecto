@@ -75,10 +75,17 @@ xadv, _, pred = deepfool(x, resnet_model,classes=31)
 #filtplot = plt.imshow(filter[0])
 #plt.show()
 
+
+
 # Show adversarial example
 adversarial_image = arraytoimage(xadv, (224, 224, 3))
 adversarialplot = plt.imshow(adversarial_image)
 plt.show()
 
 print('Predicted ResNet:', resnet50.decode_predictions(pred, top=5)[0])
+
+#Show perturbation
+perturb = xadv-x
+filtplot = plt.imshow(perturb)
+plt.show()
 

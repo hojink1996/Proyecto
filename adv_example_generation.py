@@ -42,23 +42,28 @@ def fast_gradient(model, x, eps=0.25):
 
     return xadv, signo
 
-def deepfool(x, model, eps=1e-6, max_iter=100, classes=1000):
+def deepfool(x, model, eps=1e-6, max_iter=100, classes=1000, search_classes=31):
     tol = 1e-8
     xadv = x.copy()
     # Predicted result in normal case
-    y = model.predict(x)
+    y = model.predict(x)[0]
     y_class = y.argmax()
 
     #Initialize current class as class predicted from raw input
     y_class_i = y_class
 
-    #Set loss function as cross entropy
-    gradientes = [K.gradients(model.output[:, i], model.input)[0] for i in range(classes)]
-    val_gradiente = K.function([model.input], gradientes)
-    grad = np.swapaxes(np.array(val_gradiente([xadv])), 0, 1)
+    #Build function that computes class gradient
 
+    gradientes_search = [K.gradients(model.output[:, i], model.input)[0] for i in range(search_classes)]
+    val_gradiente = K.function([model.input], gradientes_search)
 
-    #Build function that computes gradient of loss function
+    #Resize to compensate for classes not being in search_classes
+    grad = np.swapaxes(np.array(val_gradiente([xadv])), 0, 1)[0]
+    size = grad.shape
+    sizePad = (1000,) + size[1:]
+    gradPadded = np.zeros(sizePad)
+    gradPadded[:grad.shape[0], :grad.shape[1], :grad.shape[2], :grad.shape[3]] = grad
+
 
     #grad = val_gradiente([x])[0]
 
@@ -66,13 +71,14 @@ def deepfool(x, model, eps=1e-6, max_iter=100, classes=1000):
     nb_iter = 0
     perturb = xadv
     while y_class_i == y_class and nb_iter < max_iter:
-        grd_dif = grad - grad[y_class]
+        grd_dif = gradPadded - gradPadded[y_class]
         y_diff = y - y[y_class]
 
         #Mask the true label (not considered when calculating perturbation norm)
 
         mask = [0]*classes
         mask[y_class] = 1
+        mask[search_classes:] = [1]*(classes-search_classes)
         norm = np.linalg.norm(grd_dif.reshape(classes,-1), axis=1)
         diff_normalized = np.ma.array(np.abs(y_diff)/norm, mask=mask)
 
@@ -83,8 +89,10 @@ def deepfool(x, model, eps=1e-6, max_iter=100, classes=1000):
 
         #Recalculate prediction for potential adversarial example
 
-        y = model.predict(perturb)
-        grad = val_gradiente([perturb])
+        #Resize t
+        y = model.predict(perturb)[0]
+        grad = np.swapaxes(np.array(val_gradiente([xadv])), 0, 1)[0]
+        gradPadded[:grad.shape[0], :grad.shape[1], :grad.shape[2], :grad.shape[3]] = grad
         y_class_i = y.argmax()
         nb_iter += 1
 
