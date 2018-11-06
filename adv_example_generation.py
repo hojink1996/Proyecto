@@ -53,11 +53,14 @@ def deepfool(x, model, eps=1e-6, max_iter=100, classes=1000):
     y_class_i = y_class
 
     #Set loss function as cross entropy
-    gradientes = [K.gradients(K.softmax(model.output.op.inputs)[:, i], model.input)[0] for i in range(classes)]
+    gradientes = [K.gradients(model.output[:, i], model.input)[0] for i in range(classes)]
+    val_gradiente = K.function([model.input], gradientes)
+    grad = np.swapaxes(np.array(val_gradiente([xadv])), 0, 1)
+
 
     #Build function that computes gradient of loss function
-    val_gradiente = K.function([model.input], gradientes)
-    grad = val_gradiente([x])[0]
+
+    #grad = val_gradiente([x])[0]
 
     #Initialize iteration counter and perturbation
     nb_iter = 0

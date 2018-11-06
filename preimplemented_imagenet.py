@@ -68,7 +68,7 @@ print('===== Adversarial Examples ======')
 
 #TESTTTT
 
-xadv, _, pred = deepfool(x, resnet_model)
+xadv, _, pred = deepfool(x, resnet_model,classes=31)
 
 
 # Show adversarial example filter
