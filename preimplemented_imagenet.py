@@ -1,11 +1,11 @@
-'''
+"""
 Takes a image from Image Net and compares the classification result of the original image
 and an adversarial example generated for the ResNet50 and Inception v3 models.
 Also shows the original image, the filter used to generate the adversarial example
 and the adversarial example itself.
 
 Authors: Hojin Kang and Tomas Nunez
-'''
+"""
 
 # Model import
 from keras.applications import resnet50

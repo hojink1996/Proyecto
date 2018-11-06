@@ -1,8 +1,8 @@
-'''
+"""
 Script that implemeted to generate a single image and its tag.
 
 Authors: Hojin Kang and Tomas Nunez
-'''
+"""
 
 import glob
 import cv2
@@ -15,7 +15,7 @@ images = glob.glob('/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/
 
 # Function that visualizes a single image and its tag
 def single_img(n, height, width):
-    '''
+    """
     Gets a single image and its tag.
 
     :param      n       : Number of the image to visualize
@@ -23,7 +23,7 @@ def single_img(n, height, width):
                 width   : size to rescale the width of the image
 
     :return:    A tuple with the images scaled to size, and its tag
-    '''
+    """
     # Read lines from the text file with the tags
     with open(tags) as tag:
         content = tag.readlines()

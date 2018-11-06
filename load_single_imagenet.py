@@ -1,8 +1,8 @@
-'''
+"""
 Script implemented to get a single image from the imagenet dataset, its tag and its idetifier (code)
 
 Authors: Hojin Kang and Tomas Nunez
-'''
+"""
 
 import glob
 import shutil
@@ -12,23 +12,23 @@ import PIL
 import urllib.request
 
 # Tags and images
-#tags = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/words.txt'
-#images ='/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/fall11_urls.txt'
+# tags = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/words.txt'
+# images ='/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/fall11_urls.txt'
 tags = '/home/tomas/Documents/Inteligencia Computacional/tiny-imagenet-200/words.txt'
 images = '/home/tomas/Documents/Inteligencia Computacional/Proyecto/fall11_urls.txt'
 
 
 # Function that visualizes a single image and its tag
 def single_img(n, height, width):
-    '''
+    """
     Gets a single image and its tag.
 
     :param      n       : Number of the image to visualize
-                height  :size to rescale the height of the image
-                width   : size to rescale the width of the image
+    :param      height  :size to rescale the height of the image
+    :param      width   : size to rescale the width of the image
 
     :return:    A tuple with the images scaled to size, its tag and the identifier
-    '''
+    """
     # Read lines from the text file with the tags
     with open(tags) as tag:
         content = tag.readlines()
