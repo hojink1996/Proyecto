@@ -47,14 +47,20 @@ def deepfool(x, model, eps=1e-6, max_iter=100, classes=1000):
     xadv = x.copy()
     # Predicted result in normal case
     y = model.predict(x)
-    y_var = K.variable(y)
     y_class = y.argmax()
+
+    #Initialize current class as class predicted from raw input
     y_class_i = y_class
 
-    costo = metrics.categorical_crossentropy(model.output, esperado)
-    gradiente = K.gradients(costo, model.input)
-    val_gradiente = K.function([model.input], gradiente)
+    #Set loss function as cross entropy
+    gradientes = [K.gradients(model.output[:, i], model.input)[0]
+     for i in range(classes)]
+
+    #Build function that computes gradient of loss function
+    val_gradiente = K.function([model.input], gradientes)
     grad = val_gradiente([x])[0]
+
+    #Initialize iteration counter and perturbation
     nb_iter = 0
     perturb = xadv
     while y_class_i == y_class and nb_iter < max_iter:
@@ -69,13 +75,27 @@ def deepfool(x, model, eps=1e-6, max_iter=100, classes=1000):
         diff_normalized = np.ma.array(np.abs(y_diff)/norm, mask=mask)
 
         #Choose index of smallest difference, fill value corresponding to true class to +inf
-        l = value.argmin(fill_value =np.inf)
+        l = diff_normalized.argmin(fill_value =np.inf)
         r = (abs(y_diff[l]) / (pow(np.linalg.norm(y_diff[l]), 2) + tol)) * y_diff[l]
         perturb = np.clip(perturb + r, 0, 1)
 
         #Recalculate prediction for potential adversarial example
 
         y = model.predict(perturb)
+        grad = val_gradiente([perturb])
+        y_class_i = y.argmax()
+        nb_iter += 1
+
+    #Adversarial example as a function of eps
+    x_adv = np.clip(x_adv + (1 + eps)*(perturb - x_adv),0,1)
+
+    #Label assigned to adversarial example
+    y_adv = model.predict(x_adv).argmax()
+
+    #Return adversarial examples, and both initial and adversarial prediction
+
+    return x_adv, y_class, y_adv
+
 def arraytoimage(xarr, dim):
     """
     Makes a PIL image from an array
