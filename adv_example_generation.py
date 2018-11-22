@@ -93,9 +93,12 @@ def fast_gradient_batch_generation(model, x, eps=0.25):
 
     :return:    A tuple containing the adversarial examples generated and the filters used to generate them
     """
+    xadv = []
+    filter = []
     for x_image in x:
+        x_image = np.asarray([x_image])
         # Predicted result in normal case
-        y = model.predict([x_image]).argmax()
+        y = model.predict(x_image).argmax()
 
         # Make predicted variable into categorical variable (0s or 1s) of 1000 classes (ImageNet)
         y_categorical = to_categorical(y, 1000)
@@ -110,11 +113,8 @@ def fast_gradient_batch_generation(model, x, eps=0.25):
         gradiente = K.gradients(costo, model.input)
         val_gradiente = K.function([model.input], gradiente)
 
-        xadv = []
-        filter = []
-
         # Remember that the adversarial examples are x + eps*sign(gradient)
-        signo = np.sign(val_gradiente([x_image])[0])
+        signo = np.sign(val_gradiente([x_image])[0])[0]
         xadv.append(x_image + eps*signo)
         filter.append(signo)
 

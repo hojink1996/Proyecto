@@ -79,21 +79,25 @@ print('===== Adversarial Examples ======')
 # Generate an adversarial example for the resnet model
 
 xadv, filter = fast_gradient_batch_generation(resnet_model, inputs, 3)
-pred = resnet_model.predict(xadv)
+pred_adv = []
+for i, xadv_i in enumerate(xadv):
+    pred = resnet_model.predict(xadv_i)
+    pred_adv.append(pred)
+    filtplot = plt.imshow(filter[i])
+    plt.show()
+    adversarial_image = arraytoimage(xadv_i, (224, 224, 3))
+    adversarialplot = plt.imshow(adversarial_image)
+    plt.show()
+    print('Predicted ResNet:', resnet50.decode_predictions(pred, top=5)[0])
 
 # Testing
 # xadv, _, pred = deepfool(x, resnet_model, classes=1000, search_classes=30)
 
 # Show adversarial example filter
-filtplot = plt.imshow(filter[0])
-plt.show()
+
 
 # Show adversarial example
-adversarial_image = arraytoimage(xadv, (224, 224, 3))
-adversarialplot = plt.imshow(adversarial_image)
-plt.show()
 
-print('Predicted ResNet:', resnet50.decode_predictions(pred, top=5)[0])
 
 # Show perturbation
 # perturb = xadv-x

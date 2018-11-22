@@ -97,7 +97,7 @@ def single_img_val(n, height, width):
     i = 0
     with open(tags_val) as tags:
         for i, line in enumerate(tags):
-            if i == n:
+            if i == n-1:
                 _, tagnumber = line.split(" ", 1)
                 with open(tags_names) as names:
                     for j, line2 in enumerate(names):
