@@ -10,15 +10,17 @@ from keras.preprocessing import image
 from PIL import Image
 import PIL
 import urllib.request
+import numpy as np
 
 # Path to tags and images
-# tags = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/words.txt'
-# images ='/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/fall11_urls.txt'
-tags = '/home/tomas/Documents/Inteligencia Computacional/tiny-imagenet-200/words.txt'
-images = '/home/tomas/Documents/Inteligencia Computacional/Proyecto/fall11_urls.txt'
-images_val = '/home/tomas/Documents/Inteligencia Computacional/ILSVRC2012'
-tags_val = '/home/tomas/Documents/Inteligencia Computacional/Labels/val.txt'
-tags_names = '/home/tomas/Documents/Inteligencia Computacional/Labels/synset_words.txt'
+tags = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/tiny-imagenet-200/words.txt'
+images ='/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/fall11_urls.txt'
+# tags = '/home/tomas/Documents/Inteligencia Computacional/tiny-imagenet-200/words.txt'
+# images = '/home/tomas/Documents/Inteligencia Computacional/Proyecto/fall11_urls.txt'
+images_val = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/ILSVRC2012Val'
+tags_val = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/val.txt'
+tags_names = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/synset_words.txt'
+adversarial = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/Adversarios/'
 
 # Function that visualizes a single image and its tag
 def single_img(n, height, width):
@@ -107,5 +109,68 @@ def single_img_val(n, height, width):
             elif i > n:
                 break
     return img, clase, identifier
+
+def n_images_validation(n_ini, n_fin, height, width):
+    """
+    Gets n images from the validation folder, along with its tag and identifier
+
+    :param      n_ini   : Value of first image
+    :param      n_fin   : Value of las image
+    :param      height  : size to rescale the height of the image
+    :param      width   : size to rescale the width of the image
+
+    :return:    A tuple with the images scaled to size, its tag and identifiers
+    """
+    imgpaths = []
+    for i in np.arange(n_ini, n_fin):
+        n_padded = (str(i + 1)).rjust(5, '0')
+        imgpaths.append(images_val+'/ILSVRC2012_val_000'+ n_padded +'.JPEG')
+    size = (height, width)
+    identifiers = []
+    clases = []
+    images = []
+
+    for i in range(len(imgpaths)):
+        img = image.load_img(imgpaths[i], target_size=size)
+        images.append(img)
+
+    with open(tags_val) as tags:
+        for i, line in enumerate(tags):
+            if n_ini - 1< i < n_fin:
+                _, tagnumber = line.split(" ", 1)
+                with open(tags_names) as names:
+                    for j, line2 in enumerate(names):
+                        if j == int(tagnumber):
+                            identifier, clase = line2.split(" ", 1)
+                            identifiers.append(identifier)
+                            clases.append(clase)
+                            break
+            elif i > n_fin:
+                break
+    return images, clases, identifiers
+
+def n_images_adversarial(n_ini, n_fin, height, width):
+    """
+    Gets n images from the adversarial examples
+
+    :param      n_ini   : Value of first image
+    :param      n_fin   : Value of las image
+    :param      height  : size to rescale the height of the image
+    :param      width   : size to rescale the width of the image
+
+    :return:    A tuple with the images scaled to size, its tag and identifiers
+    """
+    imgpaths = []
+    for i in np.arange(n_ini, n_fin):
+        imgpaths.append(adversarial + str(i + 1) +'.JPEG')
+    size = (height, width)
+    images = []
+
+    for i in range(len(imgpaths)):
+        img = image.load_img(imgpaths[i], target_size=size)
+        images.append(img)
+
+    return images
+
 
 
