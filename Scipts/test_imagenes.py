@@ -1,12 +1,15 @@
-from adv_example_generation import fast_gradient_batch_saving_no_return
-import matplotlib.pyplot as plt
+"""
+Simple script that generates adversarial examples and saves them
+
+Authors: Hojin Kang and Tomas Nunez
+"""
+from Tools.adv_example_generation import fast_gradient_batch_saving_no_return
 from keras.applications import resnet50
-import numpy as np
-from load_single_imagenet import single_img_val
 
 resnet_model = resnet50.ResNet50(weights='imagenet')
 for i in range(10):
     fast_gradient_batch_saving_no_return(resnet_model, 5, 4, True, 400 + i*20)
+
 #
 # for adv in adversarios:
 #     img = plt.imshow(adv)

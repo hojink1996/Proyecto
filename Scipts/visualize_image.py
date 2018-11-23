@@ -4,7 +4,7 @@ Script that visualizes a single image (given by n), and prints its tag.
 Authors: Hojin Kang and Tomas Nunez
 """
 
-from load_single_imagenet import single_img
+from Tools.load_single_imagenet import single_img
 import matplotlib.pyplot as plt
 
 # Image to visualize

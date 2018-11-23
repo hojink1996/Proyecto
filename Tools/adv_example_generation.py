@@ -1,5 +1,6 @@
 """
 Script that generates adversarial examples and also does the reverse procedure of the preprocessing.
+Incorporates generation of adversarial examples by batch and saving of the images.
 
 Authors: Hojin Kang and Tomas Nunez
 """
@@ -11,7 +12,8 @@ import numpy as np
 from PIL import Image
 from keras.preprocessing import image
 
-from load_single_imagenet import n_images_validation
+from Tools.load_single_imagenet import n_images_validation
+
 
 def fast_gradient(model, x, eps=0.25):
     """
@@ -49,15 +51,17 @@ def fast_gradient(model, x, eps=0.25):
 
     return xadv, signo
 
+
 def fast_gradient_batch_generation(model, x, eps=0.25):
     """
-    Generates an adversarial example for the model using the fast gradient method
+    Generates a batch of adversarial examples for the model using the fast gradient method
 
     :param      model   : The model from which to generate an adversarial example
     :param      x       : An array of images from which to generate the adversarial examples
     :param      eps     : The epsilon parameter that ponderates the gradient sign
 
-    :return:    A tuple containing the adversarial examples generated and the filters used to generate them
+    :return:    A tuple containing the list of adversarial examples generated and the
+                list of filters used to generate them
     """
     xadv = []
     filter = []
@@ -87,7 +91,18 @@ def fast_gradient_batch_generation(model, x, eps=0.25):
 
     return xadv, filter
 
+
 def fast_gradient_batch_saving(model, n_batches, size_batches, save_img, pos_ini = 0):
+    """
+    Function that generates adversarial examples and returns them.
+
+    :param model:           The model from which to generate the examples
+    :param n_batches:       Number of batches to generate
+    :param size_batches:    Size of each batch
+    :param save_img:        Boolean representing whether to save images or not
+    :param pos_ini:         The initial position from which to generate the batches (0 by default)
+    :return:                A tuple of lists containing the adversarial examples and the original classes
+    """
     adversarios_totales = []
     clases_totales = []
     i = pos_ini + 1
@@ -108,7 +123,18 @@ def fast_gradient_batch_saving(model, n_batches, size_batches, save_img, pos_ini
 
     return adversarios_totales, clases_totales
 
+
 def fast_gradient_batch_saving_no_return(model, n_batches, size_batches, save_img, pos_ini = 0):
+    """
+    Function that generates adversarial examples but doesn't return them.
+
+    :param model:           The model from which to generate the examples
+    :param n_batches:       Number of batches to generate
+    :param size_batches:    Size of each batch
+    :param save_img:        Boolean representing whether to save images or not
+    :param pos_ini:         The initial position from which to generate the batches (0 by default)
+    :return:
+    """
     i = pos_ini + 1
     size_batches = size_batches
     for n in range(n_batches):
@@ -123,6 +149,7 @@ def fast_gradient_batch_saving_no_return(model, n_batches, size_batches, save_im
                 adversario = image.array_to_img(adversario)
                 adversario.save(path, 'JPEG')
                 i = i + 1
+
 
 def deepfool(x, model, eps=1e-6, max_iter=100, classes=1000, search_classes=31):
     """

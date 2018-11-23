@@ -16,11 +16,10 @@ from keras.applications import inception_v3
 import matplotlib.pyplot as plt
 import ssl
 import numpy as np
-import random
 
 # Personal library import
-from adv_example_generation import fast_gradient, arraytoimage, deepfool, fast_gradient_batch_generation
-from load_single_imagenet import single_img, single_img_val
+from Tools.adv_example_generation import arraytoimage, fast_gradient_batch_generation
+from Tools.load_single_imagenet import single_img_val
 
 
 # Fix SSL Error

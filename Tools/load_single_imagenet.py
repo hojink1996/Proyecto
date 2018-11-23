@@ -4,11 +4,8 @@ Script implemented to get a single image from the imagenet dataset, its tag and 
 Authors: Hojin Kang and Tomas Nunez
 """
 
-import glob
-import shutil
 from keras.preprocessing import image
 from PIL import Image
-import PIL
 import urllib.request
 import numpy as np
 
@@ -22,7 +19,7 @@ tags_val = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/val.txt'
 tags_names = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/synset_words.txt'
 adversarial = '/home/hojin/Documentos/Primavera 2018/Inteligencia/Proyecto/Adversarios/'
 
-# Function that visualizes a single image and its tag
+
 def single_img(n, height, width):
     """
     Gets a single image and its tag.
@@ -79,6 +76,7 @@ def single_img(n, height, width):
 
     return img, clase, identifier
 
+
 def single_img_val(n, height, width):
     """
     Gets a single image from the validation folder, along with its tag and identifier
@@ -110,6 +108,7 @@ def single_img_val(n, height, width):
                 break
     return img, clase, identifier
 
+
 def n_images_validation(n_ini, n_fin, height, width):
     """
     Gets n images from the validation folder, along with its tag and identifier
@@ -119,7 +118,7 @@ def n_images_validation(n_ini, n_fin, height, width):
     :param      height  : size to rescale the height of the image
     :param      width   : size to rescale the width of the image
 
-    :return:    A tuple with the images scaled to size, its tag and identifiers
+    :return:    A tuple with the list of images scaled to size, its tag and identifiers
     """
     imgpaths = []
     for i in np.arange(n_ini, n_fin):
@@ -149,6 +148,7 @@ def n_images_validation(n_ini, n_fin, height, width):
                 break
     return images, clases, identifiers
 
+
 def n_images_adversarial(n_ini, n_fin, height, width):
     """
     Gets n images from the adversarial examples
@@ -158,7 +158,7 @@ def n_images_adversarial(n_ini, n_fin, height, width):
     :param      height  : size to rescale the height of the image
     :param      width   : size to rescale the width of the image
 
-    :return:    A tuple with the images scaled to size, its tag and identifiers
+    :return:    A list with the adversarial examples
     """
     imgpaths = []
     for i in np.arange(n_ini, n_fin):
