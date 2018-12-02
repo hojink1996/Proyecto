@@ -5,10 +5,17 @@ Authors: Hojin Kang and Tomas Nunez
 """
 from Tools.adv_example_generation import fast_gradient_batch_saving_no_return
 from keras.applications import resnet50
+import keras.backend as K
+import tensorflow as tf
 
-resnet_model = resnet50.ResNet50(weights='imagenet')
-for i in range(10):
-    fast_gradient_batch_saving_no_return(resnet_model, 5, 4, True, 400 + i*20)
+for i in range(50):
+    resnet_model = resnet50.ResNet50(weights='imagenet')
+    fast_gradient_batch_saving_no_return(resnet_model, 5, 4, True, 1308 + i*20)
+
+    # Clear session
+    K.clear_session()
+    tf.reset_default_graph()
+
 
 #
 # for adv in adversarios:

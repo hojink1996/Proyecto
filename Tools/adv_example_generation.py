@@ -6,11 +6,13 @@ Authors: Hojin Kang and Tomas Nunez
 """
 
 from keras import backend as K
+from keras import Model
 from keras.utils.np_utils import to_categorical
 from keras import metrics
 import numpy as np
 from PIL import Image
 from keras.preprocessing import image
+import tensorflow as tf
 
 from Tools.load_single_imagenet import n_images_validation
 
