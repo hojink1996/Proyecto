@@ -1,8 +1,12 @@
+"""
+Script used to retrain the ResNet50 model with the adversarial examples.
+
+Authors: Hojin Kang and Tomas Nunez
+"""
+
 from keras.applications import resnet50
 from keras import models
 from keras.optimizers import SGD
-from keras.preprocessing import image
-import numpy as np
 from keras.callbacks import EarlyStopping
 from keras.callbacks import ModelCheckpoint
 
@@ -21,7 +25,7 @@ batch_size = 1
 resnet_model = resnet50.ResNet50(weights = 'imagenet')
 
 # Create new model for RESNET50
-# generate_new_model(resnet_model, 'newresnet50.h5')
+generate_new_model(resnet_model, 'newresnet50.h5')
 
 # Load model for RESNET50
 new_model = models.load_model('newresnet50.h5')
@@ -51,8 +55,4 @@ train_adv = resnet50.preprocess_input(train_adv)
 record = new_model.fit(x=train_adv, y=y_train, epochs=n_epochs, shuffle=True, verbose=1, callbacks=callbacks_list,
                        validation_split=0.1)
 generate_new_model(new_model, '2000examples5epochs.h5')
-
-# Get predictions
-# pred = new_model.predict(val_adv)
-# pred_original = resnet_model.predict(val_adv)
 

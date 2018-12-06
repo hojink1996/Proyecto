@@ -1,6 +1,11 @@
+"""
+Tools used to retrain the model using adversarial examples.
 
+Authors: Hojin Kang and Tomas Nunez
+"""
 from keras import models
 import numpy as np
+
 
 def generate_new_model(model, name):
     """
@@ -20,11 +25,13 @@ def generate_new_model(model, name):
     new_model.save(name)
 
 
-def retrain_model(model):
-    return
-
-
 def generate_value_map(path_to_tags):
+    """
+    Generate a dictionary with the tags and its values
+
+    :param path_to_tags:    Path to the txt containing the tags
+    :return:                A dictionary representing the tags and its values
+    """
     # Dictionary with the tags
     identificadores = {}
     with open(path_to_tags) as tag:
@@ -41,6 +48,13 @@ def generate_value_map(path_to_tags):
 
 
 def expected_answers(path_to_val, num):
+    """
+    Generate the expected output as a One Hot vector
+
+    :param path_to_val:     Path to the txt containing the expected values
+    :param num:             Number of the value
+    :return:                A One Hot Vector representing the expected output
+    """
     # Number of classes
     n_classes = 1000
 

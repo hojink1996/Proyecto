@@ -1,7 +1,12 @@
+"""
+Simple script that tests the retrained model.
+
+Authors: Hojin Kang and Tomas Nunez
+"""
+
 from keras import models
 from keras.applications import resnet50
 
-from Tools.retrain_adversarial import generate_new_model
 from Tools.retrain_adversarial import expected_answers
 from Tools.load_single_imagenet import n_arrays_adversarial
 

@@ -1,3 +1,9 @@
+"""
+Script that Graphs the Learning Curves of the retraining of the model.
+
+Authors: Hojin Kang and Tomas Nunez
+"""
+
 import json
 import matplotlib.pyplot as plt
 
