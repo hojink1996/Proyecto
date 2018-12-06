@@ -8,9 +8,9 @@ from keras.applications import resnet50
 import keras.backend as K
 import tensorflow as tf
 
-for i in range(50):
+for i in range(1000):
     resnet_model = resnet50.ResNet50(weights='imagenet')
-    fast_gradient_batch_saving_no_return(resnet_model, 5, 4, True, 1308 + i*20)
+    fast_gradient_batch_saving_no_return(resnet_model, 5, 4, True, 2714 + i*20)
 
     # Clear session
     K.clear_session()

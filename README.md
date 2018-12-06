@@ -78,3 +78,67 @@ respectively.
 #### Accuracy for adversarial examples
 
 ![Example image](Examples/adversarial_accuracy.png)
+
+## Retraining the Model
+
+#### Description of Models
+
+<pre>
+All models are fine tuned versions of ResNet50. The main difference
+between the models is the way they were trained, which we will describe
+in the following section.
+
+
+<b>===== First Model =====</b>
+
+Learning Rate = 5e-3
+Momentum = 0.9
+Decay = 1e-6
+Dataset = 5000 Images
+Validation Split = 0.1
+100 Epochs con Early Stopping (5 Epochs)
+Val Acc = 0.430
+
+
+<b>===== Second Model Model =====</b>
+
+Learning Rate = 5e-3
+Momentum = 0.9
+Decay = 1e-6
+Dataset = 6500 Images
+Validation Split = 0.2
+100 Epochs con Early Stopping (5 Epochs)
+Val Acc = 0.456
+
+<b>===== Third Model =====</b>
+Learning Rate = 1e-3
+Momentum = 0.9
+Decay = 1e-6
+Dataset = 7500 Images
+Validation Split = 0.2
+100 Epochs con Early Stopping (5 Epochs)
+Val Acc = 0.537
+
+<b>===== Fourth Model =====</b>
+Learning Rate = 5e-4
+Momentum = 0.9
+Decay = 1e-6
+Dataset = 8500 Images
+Validation Split = 0.2
+100 Epochs con Early Stopping (5 Epochs)
+
+<b>===== Fifth Model =====</b>
+Learning Rate = 1e-3
+Momentum = 0.9
+Decay = 1e-6
+Dataset = 8500 Images
+Validation Split = 0.2
+100 Epochs con Early Stopping (5 Epochs)
+
+
+</pre>
+
+With the previously described models,we obtain the following learning
+curves:
+
+![Example image](Examples/learning_curve_total.png)

@@ -173,4 +173,27 @@ def n_images_adversarial(n_ini, n_fin, height, width):
     return images
 
 
+def n_arrays_adversarial(n_ini, n_fin, height, width):
+    """
+    Gets n images from the adversarial examples
+
+    :param      n_ini   : Value of first image
+    :param      n_fin   : Value of las image
+    :param      height  : size to rescale the height of the image
+    :param      width   : size to rescale the width of the image
+
+    :return:    A list with adversarial examples in array form
+    """
+    imgpaths = []
+    for i in np.arange(n_ini, n_fin):
+        imgpaths.append(adversarial + str(i + 1) +'.JPEG')
+    size = (height, width)
+    arrays = []
+
+    for i in range(len(imgpaths)):
+        img = image.load_img(imgpaths[i], target_size=size)
+        arr = image.img_to_array(img)
+        arrays.append(arr)
+
+    return np.array(arrays)
 
