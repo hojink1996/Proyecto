@@ -100,7 +100,7 @@ Validation Split = 0.1
 Val Acc = 0.430
 
 
-<b>===== Second Model Model =====</b>
+<b>===== Second Model =====</b>
 
 Learning Rate = 5e-3
 Momentum = 0.9
