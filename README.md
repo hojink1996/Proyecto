@@ -146,4 +146,5 @@ curves:
 #### Accuracy Inception v3 on Adversarial Dataset
 
 Top 1 Accuracy: 55.6%   (Decrease from 78.8%)
+
 Top 5 Accuracy: 81.3%   (Decrease from 94.4%)
